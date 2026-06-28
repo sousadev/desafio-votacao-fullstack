@@ -2,7 +2,7 @@ package com.sousadev.voteapp.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 
-import java.time.Duration;
+import java.time.LocalDateTime;
 
 public record PautaDto(
 
@@ -11,7 +11,7 @@ public record PautaDto(
 
         String description,
 
-        Duration expireIn
+        LocalDateTime expireIn
 
 ) {
 }

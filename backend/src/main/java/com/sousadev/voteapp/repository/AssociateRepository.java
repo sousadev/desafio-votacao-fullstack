@@ -11,5 +11,6 @@ import java.util.UUID;
 public interface AssociateRepository extends JpaRepository<Associate, UUID> {
 
     Optional<Associate> findByDocument(String document);
-    Optional<Associate> findByPautaId(UUID pautaId);
+
+
 }

@@ -3,8 +3,6 @@ package com.sousadev.voteapp.dtos;
 import com.sousadev.voteapp.entity.Pauta;
 import com.sousadev.voteapp.entity.Vote;
 import lombok.Builder;
-
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -15,13 +13,14 @@ public record PautaResponseDto(
         String name,
         String description,
         LocalDateTime createdAt,
-        Duration expireIn,
-        List<VoteResponseDto> votes
-) {
+        LocalDateTime expireIn,
+        List<VoteResponseDto> votes) {
+
     public static PautaResponseDto fromEntity(Pauta pauta) {
-        List<VoteResponseDto> voteDtos = pauta.getVotes().stream()
-                .map(VoteResponseDto::fromEntity)
-                .toList();
+        List<VoteResponseDto> voteDtos = (pauta.getVotes() == null) ? List.of()
+                : pauta.getVotes().stream()
+                        .map(VoteResponseDto::fromEntity)
+                        .toList();
         return PautaResponseDto.builder()
                 .id(pauta.getId())
                 .name(pauta.getName())
@@ -32,18 +31,16 @@ public record PautaResponseDto(
                 .build();
     }
 
-    @Builder
-    public record VoteResponseDto(
+    public static record VoteResponseDto(
             UUID id,
             UUID associateId,
-            String voteValue
-    ) {
+            String voteValue) {
         public static VoteResponseDto fromEntity(Vote vote) {
-            return VoteResponseDto.builder()
-                    .id(vote.getId())
-                    .associateId(vote.getAssociate().getId())
-                    .voteValue(vote.getValue().name())
-                    .build();
+            return new VoteResponseDto(
+                    vote.getId(),
+                    vote.getAssociate().getId(),
+                    vote.getValue().name()
+            );
         }
     }
 }

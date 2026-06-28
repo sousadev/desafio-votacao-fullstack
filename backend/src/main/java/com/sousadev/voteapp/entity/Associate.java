@@ -24,7 +24,7 @@ public class Associate {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true, length = 11)
+    @Column(nullable = false, unique = true, length = 14)
     private String document;
 
     @JsonIgnore

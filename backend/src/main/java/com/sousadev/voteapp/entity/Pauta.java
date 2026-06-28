@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,7 @@ public class Pauta {
 
     private LocalDateTime createdAt;
 
-    private Duration expireIn;
+    private LocalDateTime expireIn;
 
     @JsonIgnore
     @OneToMany(mappedBy = "pauta")

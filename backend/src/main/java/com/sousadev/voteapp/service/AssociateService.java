@@ -31,9 +31,6 @@ public class AssociateService {
         String document = CpfValidatorUtil.normalize(request.document());
 
         Optional<Associate> associateReady = associateRepository.findByDocument(document);
-        if (associateReady.isPresent()) {
-            return associateReady.get();
-        }
 
         Associate associate = Associate.builder()
                 .name(request.name())
